@@ -1,96 +1,154 @@
 # LangChain Groq Chatbot
 
-A simple Python chatbot that uses LangChain with the Groq-hosted
-`openai/gpt-oss-120b` model. The project includes both a command-line example and
-a Streamlit web interface.
+A simple Python chatbot built using **LangChain** and the Groq-hosted `openai/gpt-oss-120b` model. This project includes both a command-line chatbot and a web-based chat interface built with Streamlit.
 
 ## Features
 
-- Generate responses through a Groq-hosted language model
-- Run prompts from the command line
-- Use a browser-based chat interface with Streamlit
+- Generate responses using a Groq-hosted large language model
+- Run prompts through a command-line interface
+- Interact with the chatbot through a Streamlit web application
 - Display response metadata, token usage, model name, and finish reason
-- Load API credentials securely from a `.env` file
+- Securely load API credentials using environment variables and a `.env` file
+
+## Screenshots
+
+### Chatbot Web Interface
+
+![LangChain Groq Chatbot Interface](screenshots/chatbot-interface.png)
+
+### AI-Generated Response
+
+![LangChain Groq Chatbot Response](screenshots/chatbot-response.png)
 
 ## Project Structure
 
 ```text
 first_llm/
-|-- app.py            # Streamlit web interface
-|-- main.py           # Command-line chatbot example
-|-- requirements.txt  # Python dependencies
-`-- new_env/          # Optional local virtual environment
+│
+├── app.py                       # Streamlit web interface
+├── main.py                      # Command-line chatbot example
+├── requirements.txt              # Python dependencies
+├── README.md                     # Project documentation
+├── .env                          # API credentials (not committed)
+├── .gitignore                    # Git ignore rules
+│
+└── screenshots/
+    ├── chatbot-interface.png     # Chatbot interface screenshot
+    └── chatbot-response.png      # Chatbot response screenshot
 ```
+
+## Tech Stack
+
+- **Python**
+- **LangChain**
+- **Groq API**
+- **OpenAI GPT-OSS 120B**
+- **Streamlit**
+- **python-dotenv**
 
 ## Prerequisites
 
 - Python 3.10 or newer
 - A Groq API key
-- Internet access
+- Internet connection
 
 ## Installation
 
-1. Clone or download this repository and open its directory:
+### 1. Clone the repository
 
-   ```powershell
-   cd "C:\Users\BEDANTO BOSE\Desktop\Gen & Agentic AI\first_llm"
-   ```
+```bash
+git clone <your-repository-url>
+```
 
-2. Create and activate a virtual environment:
+Navigate to the project directory:
 
-   ```powershell
-   python -m venv .venv
-   .venv\Scripts\Activate.ps1
-   ```
+```powershell
+cd first_llm
+```
 
-   If PowerShell blocks activation scripts, allow them for the current process:
+Alternatively, if you have already downloaded the project, navigate to its folder:
 
-   ```powershell
-   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-   ```
+```powershell
+cd "C:\Users\BEDANTO BOSE\Desktop\Gen & Agentic AI\first_llm"
+```
 
-3. Install the dependencies:
+### 2. Create a virtual environment
 
-   ```powershell
-   pip install -r requirements.txt
-   pip install streamlit
-   ```
+```powershell
+python -m venv .venv
+```
 
-4. Create a `.env` file in the project root and add your Groq API key:
+Activate the virtual environment:
 
-   ```dotenv
-   GROQ_API_KEY=gsk_your_api_key_here
-   ```
+```powershell
+.venv\Scripts\Activate.ps1
+```
 
-   Do not commit `.env` or share the API key publicly.
+If PowerShell blocks activation scripts, run:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+```
+
+Then activate the environment again.
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+If Streamlit is not included in your `requirements.txt`, install it separately:
+
+```bash
+pip install streamlit
+```
+
+### 4. Configure the API key
+
+Create a `.env` file in the project root directory and add your Groq API key:
+
+```dotenv
+GROQ_API_KEY=gsk_your_api_key_here
+```
+
+Replace `gsk_your_api_key_here` with your actual Groq API key.
+
+**Important:** Never commit your `.env` file or expose your API key publicly.
 
 ## Usage
 
-### Streamlit web app
+### Streamlit Web Application
 
-Run:
+Run the following command:
 
-```powershell
+```bash
 streamlit run app.py
 ```
 
-Streamlit will open the app in your browser. Enter a question and click
-**Generate Response**.
+Streamlit will launch the application in your browser.
 
-### Command-line app
+Enter your prompt in the interface and click **Generate Response** to receive an AI-generated answer.
+
+### Command-Line Application
 
 Run:
 
-```powershell
+```bash
 python main.py
 ```
 
-The script sends a predefined prompt about parrots and prints the response,
-message type, token usage, model name, and finish reason.
+The script sends a predefined prompt about parrots to the language model and prints:
 
-## Configuration
+- Generated response
+- Message type
+- Token usage
+- Model name
+- Finish reason
 
-The model configuration is in both Python files:
+## Model Configuration
+
+The model is initialized using LangChain's `init_chat_model` function:
 
 ```python
 model = init_chat_model(
@@ -99,14 +157,30 @@ model = init_chat_model(
 )
 ```
 
-Change `temperature` to adjust response variability. Lower values produce more
-focused and deterministic answers.
+### Temperature
+
+The `temperature` parameter controls the variability of generated responses.
+
+- `temperature=0` produces more focused and deterministic responses.
+- Higher temperature values generally produce more varied and creative responses.
 
 ## Troubleshooting
 
-- **Missing API key:** confirm that `.env` exists in the project root and contains
-  `GROQ_API_KEY`.
-- **Module not found:** activate the virtual environment and reinstall dependencies.
-- **Streamlit command unavailable:** install Streamlit with
-  `pip install streamlit`.
-- **Groq authentication error:** verify that the key is valid and has not been revoked.
+| Issue | Solution |
+|---|---|
+| Missing API key | Ensure that `.env` exists in the project root and contains `GROQ_API_KEY`. |
+| Module not found | Activate your virtual environment and install the required dependencies. |
+| Streamlit command unavailable | Install Streamlit using `pip install streamlit`. |
+| Groq authentication error | Verify that your API key is valid and has not been revoked. |
+| Application fails to launch | Check that all dependencies are installed and that you are running the command from the project directory. |
+
+## Security
+
+- Store API keys in a `.env` file.
+- Add `.env` to `.gitignore`.
+- Never hardcode API keys in Python source files.
+- Never upload your API credentials to GitHub.
+
+---
+
+Built using Python, LangChain, Groq, and Streamlit.
