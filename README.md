@@ -14,11 +14,11 @@ A simple Python chatbot built using **LangChain** and the Groq-hosted `openai/gp
 
 ### Chatbot Web Interface
 
-![LangChain Groq Chatbot Interface](screenshots/chatbot-interface.png)
+![LangChain Groq Chatbot Interface](<Screenshot (28).png>)
 
 ### AI-Generated Response
 
-![LangChain Groq Chatbot Response](screenshots/chatbot-response.png)
+![LangChain Groq Chatbot Response](<Screenshot (29).png>)
 
 ## Project Structure
 
